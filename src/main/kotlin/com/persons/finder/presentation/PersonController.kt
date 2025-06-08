@@ -1,0 +1,50 @@
+package com.persons.finder.presentation
+
+import com.persons.finder.data.Person
+import com.persons.finder.domain.services.PersonsService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import java.util.*
+
+@RestController
+@RequestMapping("api/v1/persons")
+class PersonController @Autowired constructor(private val personsService: PersonsService) {
+
+    /*
+        TODO PUT API to update/create someone's location using latitude and longitude
+        (JSON) Body
+     */
+
+    /*
+        POST API to create a 'person'
+        (JSON) Body and return the id of the created entity
+    */
+    @PostMapping
+    fun createPerson(@RequestBody person: Person) :  ResponseEntity<Map<String,Long>> {
+         personsService.save(person)
+         var idMap = HashMap<String, Long>()
+         idMap.put("id",person.id)
+        return ResponseEntity.ok(idMap)
+    }
+
+    /*
+        TODO GET API to retrieve people around query location with a radius in KM, Use query param for radius.
+        TODO API just return a list of persons ids (JSON)
+        // Example
+        // John wants to know who is around his location within a radius of 10km
+        // API would be called using John's id and a radius 10km
+     */
+
+    /*
+         GET API to retrieve a person or persons name using their ids
+        // Example
+        // John has the list of people around them, now they need to retrieve everybody's names to display in the app
+        // API would be called using person or persons ids
+     */
+    @GetMapping
+    fun getPersons(@RequestParam("id") ids : Set<Long>) : ResponseEntity<List<Person>> {
+        return ResponseEntity.ok( personsService.getByIds(ids))
+    }
+
+}
