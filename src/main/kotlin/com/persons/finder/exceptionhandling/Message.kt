@@ -1,4 +1,6 @@
 package com.persons.finder.exceptionhandling
 
-class Message {
-}
+data class Message (
+    val status: String,
+    val message: String
+)
