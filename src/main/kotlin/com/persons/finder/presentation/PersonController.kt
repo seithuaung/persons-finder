@@ -1,7 +1,11 @@
 package com.persons.finder.presentation
 
-import com.persons.finder.data.Person
+import com.persons.finder.domain.data.Person
 import com.persons.finder.domain.services.PersonsService
+import com.persons.finder.dto.PersonDto
+import com.persons.finder.dto.PersonIdsDto
+import com.persons.finder.usecases.RegisterPerson
+import com.persons.finder.usecases.RetrievePerson
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -9,7 +13,8 @@ import java.util.*
 
 @RestController
 @RequestMapping("api/v1/persons")
-class PersonController @Autowired constructor(private val personsService: PersonsService) {
+class PersonController @Autowired constructor(private val  registerPerson : RegisterPerson,
+    private val retrievePerson: RetrievePerson) {
 
     /*
         TODO PUT API to update/create someone's location using latitude and longitude
@@ -18,14 +23,11 @@ class PersonController @Autowired constructor(private val personsService: Person
 
     /*
         POST API to create a 'person'
-        (JSON) Body and return the id of the created entity
+        (JSON) Body and return the id of the created dto
     */
     @PostMapping
-    fun createPerson(@RequestBody person: Person) :  ResponseEntity<Map<String,Long>> {
-         personsService.save(person)
-         var idMap = HashMap<String, Long>()
-         idMap.put("id",person.id)
-        return ResponseEntity.ok(idMap)
+    fun createPerson(@RequestBody personDto: PersonDto) : ResponseEntity<PersonDto> {
+        return ResponseEntity.ok(registerPerson.register(personDto))
     }
 
     /*
@@ -43,8 +45,8 @@ class PersonController @Autowired constructor(private val personsService: Person
         // API would be called using person or persons ids
      */
     @GetMapping
-    fun getPersons(@RequestParam("id") ids : Set<Long>) : ResponseEntity<List<Person>> {
-        return ResponseEntity.ok( personsService.getByIds(ids))
+    fun getPersons(@RequestParam("id") ids : Set<Long>) : ResponseEntity<List<PersonDto>> {
+        return ResponseEntity.ok( retrievePerson.retrievePersons(ids))
     }
 
 }

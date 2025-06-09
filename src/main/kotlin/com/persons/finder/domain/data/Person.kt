@@ -1,4 +1,4 @@
-package com.persons.finder.data
+package com.persons.finder.domain.data
 
 import javax.persistence.*
 
@@ -8,7 +8,7 @@ data class Person(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
-    val name: String = "",
+    var name: String = "",
     @ElementCollection
     @CollectionTable(joinColumns = [JoinColumn(name = "reference_id")])
     val locations: List<Location> = ArrayList<Location>()

@@ -1,7 +1,7 @@
 package com.persons.finder.domain.services
 
-import com.persons.finder.data.Person
-import com.persons.finder.repository.PersonRepository
+import com.persons.finder.domain.data.Person
+import com.persons.finder.domain.repository.PersonRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -16,8 +16,8 @@ class PersonsServiceImpl @Autowired constructor(private val personRepository: Pe
         return personRepository.findAllById(ids)
     }
 
-    override fun save(person: Person) {
-        personRepository.save(person)
+    override fun save(person: Person): Person {
+       return personRepository.save(person)
     }
 
 }

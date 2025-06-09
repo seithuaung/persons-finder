@@ -1,4 +1,4 @@
-package com.persons.finder.data
+package com.persons.finder.domain.data
 
 import javax.persistence.*
 
