@@ -21,6 +21,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.h2database:h2:2.1.212")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("mysql:mysql-connector-java:8.0.33")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

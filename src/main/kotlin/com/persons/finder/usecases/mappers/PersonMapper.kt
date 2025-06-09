@@ -7,11 +7,13 @@ class PersonMapper {
 
     companion object{
 
-        fun  maptoDto(persons : List<Person>) : List<PersonDto> {
+        fun  maptoDto(persons: List<Person?>) : List<PersonDto> {
         val personDtos = mutableListOf<PersonDto>()
         persons.forEach {
-            var personDto = PersonDto(it.id, it.name)
-            personDtos.add(personDto)
+            var personDto = it?.let { it1 -> PersonDto(it1.id, it.name) }
+            if (personDto != null) {
+                personDtos.add(personDto)
+            }
         }
         return personDtos
         }

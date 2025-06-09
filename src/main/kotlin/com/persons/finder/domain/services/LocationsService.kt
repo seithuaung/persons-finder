@@ -6,4 +6,8 @@ interface LocationsService {
     fun addLocation(location: Location)
     fun removeLocation(locationReferenceId: Long)
     fun findAround(latitude: Double, longitude: Double, radiusInKm: Double) : List<Location>
+    fun findWithinBoundingBox(latMin: Double,
+                              latMax: Double,
+                              lonMin: Double,
+                              lonMax: Double): List<Location>
 }

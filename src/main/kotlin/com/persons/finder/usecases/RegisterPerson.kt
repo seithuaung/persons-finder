@@ -3,7 +3,6 @@ package com.persons.finder.usecases
 import com.persons.finder.domain.data.Person
 import com.persons.finder.domain.services.PersonsService
 import com.persons.finder.dto.PersonDto
-import com.persons.finder.dto.PersonIdsDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
